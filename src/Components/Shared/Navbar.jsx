@@ -19,8 +19,10 @@ const Navbar = () => {
         </>
     )
     return (
-        <div>
-            <div className="navbar bg-base-100 shadow-sm">
+        <nav className=' bg-base-100 shadow-sm'>
+            <div>
+            <div className="navbar container mx-auto ">
+                
   <div className="navbar-start">
     <div className="dropdown   ">
                         <div tabIndex={0} role="button" className="btn   btn-ghost lg:hidden ">
@@ -41,11 +43,13 @@ const Navbar = () => {
     </ul>
   </div>
   <div className="navbar-end gap-4">
-   <button class="btn bg-amber-600 text-white hover:bg-amber-500  ">Sign In</button>
-   <button class="btn  bg-yellow-800 text-white">Sign Up</button>
+   <button className="btn bg-amber-600 text-white hover:bg-amber-500  ">Sign In</button>
+   <button className="btn  bg-yellow-800 text-white">Sign Up</button>
   </div>
 </div>
         </div>
+        </nav>
+        
     );
 };
 

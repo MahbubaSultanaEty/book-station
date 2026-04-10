@@ -2,7 +2,7 @@ import React from 'react';
 
 const Banner = () => {
     return (
-     <div className="hero min-h-[80vh] bg-gradient-to-r from-amber-200 via-orange-200 to-yellow-100">
+     <div className="hero  min-h-[80vh] bg-gradient-to-r from-amber-200 via-orange-200 to-yellow-100">
       <div className="hero-content flex-col lg:flex-row-reverse gap-10">
         
         {/* Image */}
