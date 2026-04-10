@@ -7,12 +7,16 @@ import { RouterProvider } from "react-router/dom";
 import Homepage from './Pages/homepage/Homepage.jsx';
 import Books from './Pages/Books/books.jsx';
 import { router } from './Routes/Routes.jsx';
+import BookProvider from './Context/BookContext.jsx';
 
 
 
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-   <RouterProvider router={router}></RouterProvider>
+    <BookProvider>
+      <RouterProvider router={router}></RouterProvider>
+    </BookProvider>
+   
   </StrictMode>,
 )

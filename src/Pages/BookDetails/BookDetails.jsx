@@ -1,20 +1,26 @@
 
+import { useContext, useState } from 'react';
 import { useLoaderData, useParams } from 'react-router';
+import { BookContext } from '../../Context/BookContext';
 
 // const booksPromise = fetch("/public/BooksData.json").then(res => res.json());
 
 const BookDetails = () => {
 
     const {id} = useParams();
-    console.log("book id", id);
+    // console.log("book id", id);
     // const books = use(booksPromise)
     // console.log(books);
     const books = useLoaderData();
-    console.log(books);
+    // console.log(books);
 
     const expectedBook = books.find(book => book.bookId == id);
-    console.log(expectedBook);
+    // console.log(expectedBook);
 
+    const {handleAddToRead, storedBooks, setStoredBooks} = useContext(BookContext);
+    console.log("book context", handleAddToRead, storedBooks, setStoredBooks);
+
+  
     return (
        <div className="max-w-6xl mx-auto my-16 px-6 font-sans">
   <div className="grid lg:grid-cols-12 gap-16 items-start">
@@ -35,10 +41,10 @@ const BookDetails = () => {
     </div>
 
     {/* INFO SECTION */}
-    <div className="lg:col-span-7 flex flex-col justify-center py-4">
+    <div className="lg:col-span-7 flex flex-col justify-center py-4 ">
       
       {/* TAGS (Moved to Top for Modern look) */}
-      <div className="flex flex-wrap gap-2 mb-4">
+      <div className="flex flex-wrap gap-2 mb-4 border-b pb-4">
         {expectedBook.tags.map((tag, i) => (
           <span
             key={i}
@@ -69,7 +75,7 @@ const BookDetails = () => {
       </div>
 
       {/* META GRID - Modern Borderless Style */}
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-y-6 gap-x-4 border-y border-gray-100 py-8 mb-8">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-y-6 gap-x-4 border-y border-black-100 py-8 mb-8">
         <div>
           <p className="text-xs text-gray-400 uppercase tracking-wider mb-1">Category</p>
           <p className="font-semibold text-gray-800">{expectedBook.category}</p>
@@ -94,7 +100,9 @@ const BookDetails = () => {
 
       {/* ACTION BUTTONS */}
       <div className="flex flex-col sm:flex-row gap-4">
-        <button className="px-10 py-4 rounded-xl bg-gray-900 text-white font-semibold hover:bg-emerald-700 transition-all duration-300 shadow-lg shadow-gray-200 active:scale-95">
+                        <button
+                            onClick={()=> handleAddToRead(expectedBook)}
+                            className="px-10 py-4 rounded-xl bg-gray-900 text-white font-semibold hover:bg-emerald-700 transition-all duration-300 shadow-lg shadow-gray-200 active:scale-95">
           Add to Reading List
         </button>
         <button className="px-10 py-4 rounded-xl border-2 border-gray-200 text-gray-700 font-semibold hover:bg-gray-50 transition-all active:scale-95">
