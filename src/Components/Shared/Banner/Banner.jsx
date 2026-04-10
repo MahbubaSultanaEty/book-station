@@ -2,7 +2,7 @@ import React from 'react';
 
 const Banner = () => {
     return (
-     <div className="hero  min-h-[80vh] bg-gradient-to-r from-amber-200 via-orange-200 to-yellow-100">
+     <div className="hero  min-h-[80vh] bg-gradient-to-r from-green-200 via-lightgreen-200 to-yellow-100">
       <div className="hero-content flex-col lg:flex-row-reverse gap-10">
         
         {/* Image */}
@@ -23,11 +23,11 @@ const Banner = () => {
           </p>
 
           <div className="flex gap-4">
-            <button className="btn bg-amber-600 text-white hover:bg-amber-500 border-none">
+            <button className="btn bg-green-600 text-white hover:bg-green-500 border-none">
               Get Started
             </button>
 
-            <button className="btn btn-outline border-amber-600 text-amber-600 hover:bg-amber-600 hover:text-white">
+            <button className="btn btn-outline border-green-600 text-green-600 hover:bg-green-600 hover:text-white">
               View The List
             </button>
           </div>
