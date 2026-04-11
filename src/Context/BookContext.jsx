@@ -1,7 +1,7 @@
 import React, { createContext, useState } from 'react';
 import { toast } from 'react-toastify';
 
-export const BookContext = createContext()
+export const BookContext = createContext();
 
 const BookProvider = ({ children }) => {
     
@@ -46,7 +46,7 @@ const BookProvider = ({ children }) => {
         }
        
     }
-console.log(wishlist);
+// console.log(wishlist);
     const data = {
         storedBooks, setStoredBooks, handleMarkAsRead, handleWishlist, wishlist, setWishlist
     }

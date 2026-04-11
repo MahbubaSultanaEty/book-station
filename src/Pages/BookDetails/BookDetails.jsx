@@ -1,5 +1,5 @@
 
-import { useContext, useState } from 'react';
+import { useContext,  } from 'react';
 import { useLoaderData, useParams } from 'react-router';
 import { BookContext } from '../../Context/BookContext';
 
@@ -17,7 +17,7 @@ const BookDetails = () => {
     const expectedBook = books.find(book => book.bookId == id);
     // console.log(expectedBook);
 
-  const { handleMarkAsRead, storedBooks, setStoredBooks, handleWishlist, wishlist, setWishlist } = useContext(BookContext);
+  const { handleMarkAsRead,  handleWishlist,  } = useContext(BookContext);
   
   // console.log("book context", handleMarkAsRead, storedBooks, setStoredBooks, handleWishlist);
   // console.log(storedBooks);
