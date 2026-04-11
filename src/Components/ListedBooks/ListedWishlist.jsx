@@ -1,14 +1,30 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { BookContext } from '../../Context/BookContext';
 import { Link } from 'react-router';
 
 
-const ListedWishlist = () => {
+const ListedWishlist = ({sortingType}) => {
     const { wishlist} = useContext(BookContext);
-   
+  
+  const [filteredWishtlist, setFilteredWishlist]= useState(wishlist)
+
+  useEffect(() => {
+    if (sortingType) {
+      if (sortingType === "pages") {
+        const sortedData = [...wishlist].sort((a, b) => a.totalPages - b.totalPages)
+
+       setFilteredWishlist(sortedData);
+      } else if (sortingType === "rating") {
+       const sortedData = [...wishlist].sort((a, b) => a.rating - b.rating)
+
+        setFilteredWishlist(sortedData);
+      }
+    }
+  }, [sortingType, wishlist]);
+
 
     // Empty State Check
-    if (wishlist.length === 0) {
+    if (filteredWishtlist.length === 0) {
         return (
             <div className="text-center py-20 text-gray-500">
                 <p>Your wishlist is empty, Add some books to rour wishlist</p>
@@ -22,7 +38,7 @@ const ListedWishlist = () => {
             
             {/* Grid Container */}
           <div className="grid gap-8">
-  {wishlist.map((book) => (
+  {filteredWishtlist.map((book) => (
     <div
       key={book.id}
       className="group relative flex gap-6 items-center p-[2px] rounded-3xl bg-gradient-to-r from-emerald-400 via-cyan-400 to-blue-500 hover:scale-[1.01] transition-all duration-500"

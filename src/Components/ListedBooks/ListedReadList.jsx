@@ -1,12 +1,29 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { BookContext } from '../../Context/BookContext';
 import { Link } from 'react-router';
 
-const ListedReadList = () => {
+const ListedReadList = ({sortingType}) => {
   const { storedBooks } = useContext(BookContext);
 
+  const [filteredReadList, setFilteredReadList]= useState(storedBooks)
+
+  useEffect(() => {
+    if (sortingType) {
+      if (sortingType === "pages") {
+        const sortedData = [...storedBooks].sort((a, b) => a.totalPages - b.totalPages)
+
+        setFilteredReadList(sortedData);
+      } else if (sortingType === "rating") {
+       const sortedData = [...storedBooks].sort((a, b) => a.rating - b.rating)
+
+        setFilteredReadList(sortedData);
+      }
+    }
+  }, [sortingType, storedBooks]);
+
+
   // Empty State
-  if (storedBooks.length === 0) {
+  if (filteredReadList.length === 0) {
     return (
       <div className="text-center py-20 text-gray-500">
         <p>No books marked as read yet 📚</p>
@@ -21,9 +38,9 @@ const ListedReadList = () => {
       </h3>
 
       <div className="grid gap-8">
-        {storedBooks.map((book) => (
+        {filteredReadList.map((book) => (
           <div
-            key={book.id}
+            key={book.bookId}
             className="group relative flex gap-6 items-center p-[2px] rounded-3xl bg-gradient-to-r from-emerald-400 via-cyan-400 to-blue-500 hover:scale-[1.01] transition-all duration-500"
           >
             {/* Inner Card */}
