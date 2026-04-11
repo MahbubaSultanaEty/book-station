@@ -17,8 +17,10 @@ const BookDetails = () => {
     const expectedBook = books.find(book => book.bookId == id);
     // console.log(expectedBook);
 
-    const {handleAddToRead, storedBooks, setStoredBooks} = useContext(BookContext);
-    console.log("book context", handleAddToRead, storedBooks, setStoredBooks);
+  const { handleMarkAsRead, storedBooks, setStoredBooks, handleWishlist, wishlist, setWishlist } = useContext(BookContext);
+  
+  // console.log("book context", handleMarkAsRead, storedBooks, setStoredBooks, handleWishlist);
+  // console.log(storedBooks);
 
   
     return (
@@ -101,11 +103,13 @@ const BookDetails = () => {
       {/* ACTION BUTTONS */}
       <div className="flex flex-col sm:flex-row gap-4">
                         <button
-                            onClick={()=> handleAddToRead(expectedBook)}
+                            onClick={()=> handleMarkAsRead(expectedBook)}
                             className="px-10 py-4 rounded-xl bg-gray-900 text-white font-semibold hover:bg-emerald-700 transition-all duration-300 shadow-lg shadow-gray-200 active:scale-95">
-          Add to Reading List
+          Mark As Read
         </button>
-        <button className="px-10 py-4 rounded-xl border-2 border-gray-200 text-gray-700 font-semibold hover:bg-gray-50 transition-all active:scale-95">
+              <button
+                onClick={()=> handleWishlist(expectedBook)}
+                className="px-10 py-4 rounded-xl border-2 border-gray-200 text-gray-700 font-semibold hover:bg-gray-50 transition-all active:scale-95">
           Wishlist
         </button>
       </div>

@@ -1,12 +1,14 @@
 import React, { createContext, useState } from 'react';
+import { toast } from 'react-toastify';
 
 export const BookContext = createContext()
 
 const BookProvider = ({ children }) => {
     
-      const [storedBooks, setStoredBooks]= useState([])
+    const [storedBooks, setStoredBooks] = useState([]);
+    const [wishlist, setWishlist] = useState([])
 
-    const handleAddToRead = (currentBook) => {
+    const handleMarkAsRead = (currentBook) => {
         // step 1: store book id
         // step 2: where to store
         // step 3: array of collection
@@ -16,21 +18,42 @@ const BookProvider = ({ children }) => {
         const existBook = storedBooks.find(book => book.bookId == currentBook.bookId);
 
         if (existBook) {
-            alert("The book already exist in your reading list")
+            toast.warning("The book already exist in your reading list")
+            
         }
         else {
             setStoredBooks([...storedBooks, currentBook]);
-            alert(`${currentBook.bookName} is added to reading list succesfully`)
+             toast.success(`${currentBook.bookName} is added to reading list succesfully`)
         }
         
     }
-console.log(storedBooks);
-    const data = {
-        storedBooks, setStoredBooks, handleAddToRead
+
+    const handleWishlist = (currentBook) => {
+        const existBook = wishlist.find(book => book.bookId == currentBook.bookId);
+
+        const existInReadList = storedBooks.find(book => currentBook.bookId == book.bookId);
+
+        if (existInReadList) {
+            toast.error("this book already exist in your reading list");
+            return;
+        }
+
+        if (existBook) {
+                 toast.warning("The book already exist in your wishlist list")   
+        } else {
+            setWishlist([...wishlist, currentBook]);
+             toast.success(`${currentBook.bookName} is added to wishlist succesfully`)
+        }
+       
     }
-    return <BookContext.Provider value={data}>
+console.log(wishlist);
+    const data = {
+        storedBooks, setStoredBooks, handleMarkAsRead, handleWishlist, wishlist, setWishlist
+    }
+    return (
+        <BookContext.Provider value={data}>
         {children}
-    </BookContext.Provider>;
+    </BookContext.Provider>);
 };
 
 export default BookProvider;
